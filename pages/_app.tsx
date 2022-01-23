@@ -1,10 +1,14 @@
 import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import type { AppProps } from 'next/app';
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <h1 className="text-3xl font-bold underline">
-  Hello world!
-</h1>
+  return (<>
+  <Head>
+    <title>Singular Grid</title>
+  </Head>
+  <Component {...pageProps} />
+</>);
 }
 
 export default MyApp
