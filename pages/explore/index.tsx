@@ -1,5 +1,6 @@
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import MapView from "@/components/Map/Map";
+
 
 
 const ExploreMap = () => {
