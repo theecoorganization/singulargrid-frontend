@@ -1,8 +1,7 @@
-import { compose, withProps, withStateHandlers } from "recompose"
-import { withScriptjs, withGoogleMap, GoogleMap, Marker,InfoWindow } from "react-google-maps"
-const { MarkerClusterer } = require("react-google-maps/lib/components/addons/MarkerClusterer");
-import Image from "next/image";
-import { Fragment, useState } from "react";
+import { GoogleMap, withGoogleMap, withScriptjs } from "react-google-maps";
+import { compose, withProps, withStateHandlers } from "recompose";
+import LocationMarker from "@/components/LocationMarker/LocationMarker"
+
 
 const MyMapComponent = compose(
   withProps({
@@ -22,8 +21,7 @@ const MyMapComponent = compose(
         markerPosition: e.latLng,
         isMarkerShown:true
     })},
-    onToggleOpen: ({ isOpen, markers }) => (e) => {
-        console.log("coming open"+ JSON.stringify(e));
+    onToggleOpen: ({ isOpen }) => (e) => {
         return ({
             isOpen: !isOpen,
           })}
@@ -36,33 +34,8 @@ withGoogleMap
         defaultCenter={{ lat: -33.91722, lng: 151.23064 }}
         onClick={(e) => props.onMapClick(e)}
       >    
-          {props.markers.map(marker => (
-            <Marker
-              key={marker}
-              position={marker.latLng}
-              onClick={props.onToggleOpen}
-            > 
-             <PopOver isOpen={props.isOpen} markerInfo={marker}/>
-            </Marker>
-
-          ))}
+        <LocationMarker markers={props.markers} />
       </GoogleMap>)
 ;
-
-const PopOver = ({isOpen, markerInfo}) => {
-    const [, setIsOpen] = useState(false);
-    console.log("markerInfo,"+ markerInfo)
-    return (
-        <Fragment>
-            {isOpen &&  <InfoWindow onCloseClick={() => setIsOpen(false)}>
-                <div>
-                    <h2>Latitude: </h2>
-                    <h2>Longitude: </h2>
-                    <button className=""  name="connect">Swap</button>
-            </div>
-            </InfoWindow>}  
-    </Fragment>)
-} 
-
 
 export default MyMapComponent;
