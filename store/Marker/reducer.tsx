@@ -1,17 +1,13 @@
 import { markerActionTypes } from './action'
 
-const marker = {
-    marker : []
-}
 
-export default function reducer(state = marker, action) {
+export default function reducer(state = [], action) {
   switch (action.type) {
     case markerActionTypes.ADD:
-        return {
-            ...state,
-            marker: [...state.marker, action.values]
-        }
-
+        return [...state, action.values]    
+    case markerActionTypes.DELETE:
+        return [...state.filter(item => item != action.values)]
+        
     default:
       return state
   }

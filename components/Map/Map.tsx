@@ -3,7 +3,7 @@ import { compose, withProps, withStateHandlers } from "recompose";
 import LocationMarker from "@/components/LocationMarker/LocationMarker"
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { addMarker } from "../../store/Marker/action"
+import { addMarker,removeMarker } from "../../store/Marker/action"
 
 
 const Map = compose(
@@ -21,20 +21,21 @@ withGoogleMap
         defaultCenter={{ lat: 4.1755, lng: 73.5093 }}
         onClick={(e) => {
           props.addMarker(e.latLng);
-        } }
+        }}
       >    
-        <LocationMarker markers={props.markers} />
+       {props.markers &&  <LocationMarker  removeMarker={(item) => props.removeMarker(item)} markers={props.markers} />}
       </GoogleMap>);
 
 
 
 const mapStateToProps = (state) => ({
-  markers : state.markerDetails.marker,
+  markers : state.marker,
 })
 
 const mapDispatchToProps = (dispatch) => {
   return {
     addMarker: bindActionCreators(addMarker, dispatch),
+    removeMarker: bindActionCreators(removeMarker, dispatch)
   }
 }
 

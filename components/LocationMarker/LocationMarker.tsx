@@ -6,7 +6,7 @@ import { useRouter } from "next/dist/client/router";
 
 
 
-const LocationMarker = ({markers}) => {
+const LocationMarker = ({removeMarker, markers}) => {
     const router = useRouter();
     const [activeMarker, setActiveMarker] = useState(null);
     const handleActiveMarker = (marker) => {
@@ -22,17 +22,16 @@ const LocationMarker = ({markers}) => {
 
     return (
         <Fragment>
-        {markers.map((item,index) => (
+        {markers && markers.map((item,index) => (
             <Marker
-                key={index}
+                key={item.lng()}
                 position={item}
                 onClick={() => handleActiveMarker(index)}
               > 
             {activeMarker === index ?  (<InfoWindow key={index} onCloseClick={() => handleActiveMarker(null)}>
                 <div className="flex-col justify-items-center">
-                   <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-40 rounded mt-5" onClick={addDetails} name="remove marker"> Remove Location</button> <br />
-                   <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-40 rounded mt-5"  name="Add details"> Add Details </button>
-                   {/* <p> item: {item.latLng}</p> */}
+                   {/* <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-40 rounded mt-5" onClick={() => removeMarker(item)} name="remove marker"> Remove Location</button> <br /> */}
+                   <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-40 rounded mt-5" onClick={addDetails}  name="Add details"> Add Details </button>
             </div>
             </InfoWindow>) : null}
             </Marker>
@@ -42,15 +41,3 @@ const LocationMarker = ({markers}) => {
 }
 
 export default LocationMarker;
-
-// const mapStateToProps = (state) => ({
-//   location : state.locationDetails.location,
-// })
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     addLocation: bindActionCreators(addLocation, dispatch),
-//   }
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(LocationMarker)

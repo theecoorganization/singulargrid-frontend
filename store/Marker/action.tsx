@@ -7,4 +7,7 @@ export const markerActionTypes = {
     return dispatch({ type: markerActionTypes.ADD, values })
   }
   
+  export const removeMarker = (values) => (dispatch) => {
+    return dispatch({ type: markerActionTypes.DELETE, values })
+  }
   
