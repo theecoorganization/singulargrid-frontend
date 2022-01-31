@@ -21,7 +21,7 @@ const MyMapComponent = compose(
         markerPosition: e.latLng,
         isMarkerShown:true
     })},
-    onToggleOpen: ({ isOpen }) => (e) => {
+    onToggleOpen: ({ isOpen }) => () => {
         return ({
             isOpen: !isOpen,
           })}
@@ -30,8 +30,8 @@ withScriptjs,
 withGoogleMap
 )((props) => 
       <GoogleMap
-        defaultZoom={15}
-        defaultCenter={{ lat: -33.91722, lng: 151.23064 }}
+        defaultZoom={16}
+        defaultCenter={{ lat: 4.1755, lng: 73.5093 }}
         onClick={(e) => props.onMapClick(e)}
       >    
         <LocationMarker markers={props.markers} />
