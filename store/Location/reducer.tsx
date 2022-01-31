@@ -2,7 +2,16 @@ import { locationActionTypes } from './action'
 
 const locationInitialState = {
   name: '',
-  description: ''
+  description: '',
+  location: {
+      latitude: '',
+      longitude: ''
+  },
+  projectType: {
+      name: '',
+      color: ''
+  },
+  images: []
 }
 
 export default function reducer(state = locationInitialState, action) {
