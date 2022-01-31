@@ -1,6 +1,6 @@
 import { locationActionTypes } from './action'
 
-const locationInitialState = {
+const locationDetails = {
   name: '',
   description: '',
   location: {
@@ -14,12 +14,17 @@ const locationInitialState = {
   images: []
 }
 
-export default function reducer(state = locationInitialState, action) {
+const marker = {
+    lat: '',
+    long: ''
+}
+
+export default function reducer(state = [locationDetails], action) {
   switch (action.type) {
     case locationActionTypes.ADD:
         return {
             ...state,
-            locations: action.payload
+            locationDetails: action.payload
         }
 
     default:

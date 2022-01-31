@@ -1,7 +1,8 @@
 import { HYDRATE,createWrapper } from "next-redux-wrapper";
 import { createStore,combineReducers,applyMiddleware } from "redux";
 import thunkMiddleware from 'redux-thunk';
-import location from './Location/reducer'
+import locationDetails from './Location/reducer'
+import markerDetails from './Marker/reducer'
 
 export interface State {
   app: string;
@@ -9,7 +10,8 @@ export interface State {
 }
 
 const combinedReducer = combineReducers({
-  location
+  locationDetails,
+  markerDetails
 })
 
 const bindMiddleware = (middleware) => {

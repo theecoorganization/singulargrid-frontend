@@ -1,41 +1,41 @@
 import { GoogleMap, withGoogleMap, withScriptjs } from "react-google-maps";
 import { compose, withProps, withStateHandlers } from "recompose";
 import LocationMarker from "@/components/LocationMarker/LocationMarker"
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { addMarker } from "../../store/Marker/action"
 
 
-const MyMapComponent = compose(
+const Map = compose(
   withProps({
     googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyA_vRLuKmR5-gjWfzfk7I6mvDoNZAz8P2o&v=3.exp&map_ids=3a3b44abd7aea59f",
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `100vw` }} />,
     mapElement: <div style={{ height: `100%` }} />,
   }),
-  withStateHandlers(() => ({
-    markers : [],
-    isMarkerShown: false,
-    markerPosition: null,
-  }), {
-    onMapClick: ({ markers }) => (e) => {
-       markers[markers.length] = e;
-       return  ({
-        markerPosition: e.latLng,
-        isMarkerShown:true
-    })},
-    onToggleOpen: ({ isOpen }) => () => {
-        return ({
-            isOpen: !isOpen,
-          })}
-        }),
 withScriptjs,
 withGoogleMap
 )((props) => 
       <GoogleMap
         defaultZoom={16}
         defaultCenter={{ lat: 4.1755, lng: 73.5093 }}
-        onClick={(e) => props.onMapClick(e)}
+        onClick={(e) => {
+          props.addMarker(e.latLng);
+        } }
       >    
         <LocationMarker markers={props.markers} />
-      </GoogleMap>)
-;
+      </GoogleMap>);
 
-export default MyMapComponent;
+
+
+const mapStateToProps = (state) => ({
+  markers : state.markerDetails.marker,
+})
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addMarker: bindActionCreators(addMarker, dispatch),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Map)

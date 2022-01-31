@@ -1,11 +1,11 @@
 export const locationActionTypes = {
     ADD: 'ADD',
     UPDATE: 'UPDATE',
-    DELETE: 'DELETE'
+    DELETE: 'DELETE',
   }
-  
-  export const addLocation = () => (dispatch) => {
-    return dispatch({ type: locationActionTypes.ADD })
+
+  export const addLocation = (values) => (dispatch) => {
+    return dispatch({ type: locationActionTypes.ADD, values })
   }
 
   export const updateLocation = () => (dispatch) => {
