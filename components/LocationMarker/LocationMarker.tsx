@@ -16,8 +16,8 @@ const LocationMarker = ({removeMarker, markers}) => {
         setActiveMarker(marker);
       };
 
-    const addDetails = () => {
-      router.push('/admin/new');
+    const addDetails = (item) => {
+      router.push(`/admin/addProject?lat=${item.lat()}&lng=${item.lng()}`);
     }
 
     return (
@@ -31,7 +31,7 @@ const LocationMarker = ({removeMarker, markers}) => {
             {activeMarker === index ?  (<InfoWindow key={index} onCloseClick={() => handleActiveMarker(null)}>
                 <div className="flex-col justify-items-center">
                    {/* <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-40 rounded mt-5" onClick={() => removeMarker(item)} name="remove marker"> Remove Location</button> <br /> */}
-                   <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-40 rounded mt-5" onClick={addDetails}  name="Add details"> Add Details </button>
+                   <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-40 rounded mt-5" onClick={()=> addDetails(item)}  name="Add details"> Add Details </button>
             </div>
             </InfoWindow>) : null}
             </Marker>
