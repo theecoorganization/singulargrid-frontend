@@ -1,6 +1,6 @@
 import ListBar from "@/components/ListBar/ListBar";
 import type { NextPage } from 'next';
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router'
 
@@ -8,13 +8,18 @@ const AddProject: NextPage = (props) => {
     const [managers] = ['Atoll Council', 'Kudafari Council', 'Maafaru Council', 'Manadhoo Council'];
     const [projectType] = ['Housing Development Project', 'Conservation Area', 'Tourism Development Project']
     const { register, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
+    const [place, setPlace] = useState({});
+    const onSubmit = data => {
+        console.log(place);
+        console.log(data);
+    };
 
 
     const router = useRouter()
 
     useEffect(() => {
         const {lat, lng} = router.query;
+        setPlace({lat, lng})
     },[])
    
 

@@ -5,7 +5,18 @@ import { Fragment } from "react";
 
 const ListBar = () => {
     const router = useRouter();
-    const menuItem = ['New project', 'Project List', 'Logout']
+    const menuItem = [ {
+        name: 'New project',
+        route: '/explore'
+    },
+    {
+        name: 'View Project',
+        route: '/admin/viewProject'
+    },
+    {
+        name: 'Logout',
+        route: '/'
+    }]
 
 
 
@@ -15,8 +26,8 @@ const ListBar = () => {
                 <ul>
                   {menuItem.map((item) => (
                     <li className="mt-2">
-                       <Link href="/explore">
-                           {item}
+                       <Link href={item.route}>
+                           {item.name}
                        </Link>
                    </li>
                   ))}
