@@ -1,0 +1,35 @@
+{
+    "root": true,
+    "plugins": [
+      "@next/eslint-plugin-next",
+      "eslint-plugin-react",
+      "eslint-plugin-react"
+    ],
+    "extends": ["next", "prettier"],
+    "rules":{
+        "no-console": "error",
+        "no-var": "error",
+        "semi": "error",
+        "no-multi-spaces": "error",
+        "space-in-parens": "error",
+        "no-multiple-empty-lines": "error",
+        "prefer-const": "error",
+        "no-use-before-define": "off",
+        "constructor-super": "error",
+        "no-async-promise-executor":"error",
+        "no-class-assign":"error",
+        "no-cond-assign":"error",
+        "no-const-assign":"error",
+        "no-constant-condition":"error",
+        "no-dupe-args":"error",
+        "no-empty-pattern":"error",
+        "no-duplicate-imports":"error",
+        "no-fallthrough":"error",
+        "no-func-assign":"error",
+        "no-new-symbol":"error",
+        "no-self-assign":"error",
+        "no-unsafe-finally":"error",
+        "valid-typeof":"error",
+        "use-isnan":"error"   
+    }
+  }

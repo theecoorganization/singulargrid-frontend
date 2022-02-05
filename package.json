@@ -8,7 +8,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/eslint-plugin-next": "^12.0.10",
     "@react-google-maps/marker-clusterer": "^2.6.0",
+    "eslint-plugin-react": "^7.28.0",
     "next": "^10.0.1",
     "next-redux-wrapper": "^7.0.5",
     "react": "17.0.2",
