@@ -2,8 +2,6 @@
 import { useRouter } from "next/dist/client/router";
 import { Fragment } from "react";
 import { FunctionComponent } from "react";
-import Image from "next/image";
-import Noonu from "../../public/assets/eco.png";
 
 interface ProjectDetails {
     name: string;
@@ -25,11 +23,6 @@ const ProjectInfo:FunctionComponent<ProjectDetails> = () => {
                    but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised 
                    in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more 
                    recently with desktop publishing</p>
-                
-                <div id="flex flex-row images">
-                    <Image  src={Noonu}  alt="sample" />
-                    <Image src={Noonu} className="p-5 rounded-xl" alt="nike" />
-                </div>
             </div>
         </Fragment>
     )
