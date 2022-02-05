@@ -35,14 +35,14 @@ const AddProject: NextPage = (props) => {
                             <form onSubmit={handleSubmit(onSubmit)}>
                                 <div className="flex flex-wrap">
                                     <div className="w-full px-3">
-                                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" >
                                             Name:
                                         </label>
                                         <input {...register("name")} className="appearance-none block w-full  text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  />
                                     </div>
                                 </div>
                                 <div className="w-full px-3 mb-6">
-                                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+                                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" >
                                         Manager
                                     </label>
                                     <div className="relative">
@@ -59,7 +59,7 @@ const AddProject: NextPage = (props) => {
                                 </div>
 
                                 <div className="w-full px-3 mb-6">
-                                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+                                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                                         Type
                                     </label>
                                     <div className="relative">
@@ -76,10 +76,10 @@ const AddProject: NextPage = (props) => {
 
                                 <div className="flex flex-wrap">
                                     <div className="w-full px-3">
-                                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                                             Description:
                                         </label>
-                                        <textarea {...register("description")} className="appearance-none block w-full  text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="password" />
+                                        <textarea {...register("description")} className="appearance-none block w-full  text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" />
                                     </div>
                                 </div>
                                 <div className='flex justify-center'>
