@@ -1,9 +1,9 @@
 
 import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
-import { Fragment } from "react";
+import { Fragment, FunctionComponent } from "react";
 
-const ListBar = () => {
+const ListBar:FunctionComponent = () => {
     const router = useRouter();
     const menuItem = [ {
         name: 'New project',

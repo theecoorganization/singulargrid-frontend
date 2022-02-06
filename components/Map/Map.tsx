@@ -23,7 +23,7 @@ withGoogleMap
           props.addMarker(e.latLng);
         }}
       >    
-       {props.markers &&  <LocationMarker  removeMarker={(item) => props.removeMarker(item)} markers={props.markers} />}
+       {props.markers &&  <LocationMarker markers={props.markers} />}
       </GoogleMap>);
 
 

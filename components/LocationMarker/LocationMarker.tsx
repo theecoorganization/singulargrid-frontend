@@ -1,12 +1,10 @@
 
+import { useRouter } from "next/dist/client/router";
 import { Fragment, useState } from "react";
 import { InfoWindow, Marker } from "react-google-maps";
-import { useRouter } from "next/dist/client/router";
 
 
-
-
-const LocationMarker = ({removeMarker, markers}) => {
+const LocationMarker = ({markers}) => {
     const router = useRouter();
     const [activeMarker, setActiveMarker] = useState(null);
     const handleActiveMarker = (marker) => {
