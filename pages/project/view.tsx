@@ -22,9 +22,9 @@ const ViewProject = ({getProjects,projects}) => {
                     <ListBar />
                 </div>
                 <div className="w-2/4">
-                    {projects && projects.map((item) => (
+                    {projects ? projects.map((item) => (
                          <ProjectInfo key={item} name={item.name} type={item.projectType} manager={item.projectManager} description={item.description} />
-                    ))}
+                    )): (<h3>Oops,No projects to show!</h3>)}
                         </div>
                     </div>
                 </div>
