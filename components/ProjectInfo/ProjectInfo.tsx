@@ -16,8 +16,6 @@ interface ProjectDetails {
 }
 
 const ProjectInfo:FunctionComponent<ProjectDetails> = ({name, type, manager, description}) => {
-    const router = useRouter();
-
     return (
         <Fragment>
          <div className="">
