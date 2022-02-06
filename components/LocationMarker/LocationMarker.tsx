@@ -17,7 +17,7 @@ const LocationMarker = ({removeMarker, markers}) => {
       };
 
     const addDetails = (item) => {
-      router.push(`/admin/addProject?lat=${item.lat()}&lng=${item.lng()}`);
+      router.push(`/project/add?lat=${item.lat()}&lng=${item.lng()}`);
     }
 
     return (

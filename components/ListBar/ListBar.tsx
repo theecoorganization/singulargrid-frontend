@@ -7,27 +7,31 @@ const ListBar = () => {
     const router = useRouter();
     const menuItem = [ {
         name: 'New project',
-        route: '/explore'
+        route: '/project/add'
     },
     {
         name: 'View Project',
-        route: '/admin/viewProject'
+        route: '/project/view'
     },
     {
         name: 'Logout',
         route: '/'
     }]
 
+    const isActive = (router, item) => {
+        return router.pathname === `${item.route}`;
+      };
+
 
 
     return (
         <Fragment>
-         <div className="px-12 py-8 border-2 border-black border-solid rounded">
+         <div className="p-10 border border-radius-4 w-60 border-grey-100 border-solid rounded-lg">
                 <ul>
                   {menuItem.map((item) => (
                     <li className="mt-2">
                        <Link href={item.route}>
-                           {item.name}
+                            <p className={`cursor-pointer  ${isActive(router, item) ? 'text-black font-bold' : 'text-slate-700'}`}>{item.name}</p>
                        </Link>
                    </li>
                   ))}
