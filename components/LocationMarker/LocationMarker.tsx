@@ -24,11 +24,11 @@ const LocationMarker = ({markers, editable}) => {
            {markers && markers.map((item,index) => (
           <Marker
               key={index}
-              position={{lat: parseFloat(item.lat), lng: parseFloat(item.lng)}}
+              position={{lat: parseFloat(item.location.lat), lng: parseFloat(item.location.lng)}}
               onClick={() => handleActiveMarker(index)}
             > 
               {activeMarker === index ?  (<InfoWindow key={index} onCloseClick={() => handleActiveMarker(null)}>
-                <h6>Sweet as!</h6>
+                <h6>{item.projectType} - {item.description}</h6>
             </InfoWindow>) : null}
 
           </Marker>
