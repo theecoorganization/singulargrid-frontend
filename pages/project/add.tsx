@@ -42,7 +42,7 @@ const AddProject: NextPage = (props) => {
                     <ListBar />
                 </div>
                 <div className="w-2/4 p-16 mt-12 border-2 border-grey-300 border-solid rounded">
-                <div className="flex flex-col mt-20 ml-40  absolute z-50 border border-red-500">
+                <div className="flex flex-col mt-20 ml-40  absolute z-50 border">
                 {showModal ? <Modal>
                 <div className="flex flex-col justify-between">
                     <p> Successfully added project </p>
