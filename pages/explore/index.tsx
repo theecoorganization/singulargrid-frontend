@@ -14,7 +14,7 @@ const ExploreMap = ({getProjects}) => {
         const response = await getProjects();
         if(response.payload) {
             response.payload.map((item) => {
-                setMarkers((prev) => [...prev, item.location])
+                setMarkers((prev) => [...prev, item])
             })
         }
     };
