@@ -4,7 +4,7 @@ import { Fragment, useState } from "react";
 import { InfoWindow, Marker } from "react-google-maps";
 
 
-const LocationMarker = ({markers}) => {
+const LocationMarker = ({markers, editable}) => {
     const router = useRouter();
     const [activeMarker, setActiveMarker] = useState(null);
     const handleActiveMarker = (marker) => {
@@ -18,9 +18,30 @@ const LocationMarker = ({markers}) => {
       router.push(`/project/add?lat=${item.lat()}&lng=${item.lng()}`);
     }
 
-    return (
+    const onlyView = () => {
+      return (
         <Fragment>
-        {markers && markers.map((item,index) => (
+           {markers && markers.map((item,index) => (
+          <Marker
+              key={index}
+              position={{lat: parseFloat(item.lat), lng: parseFloat(item.lng)}}
+              onClick={() => handleActiveMarker(index)}
+            > 
+              {activeMarker === index ?  (<InfoWindow key={index} onCloseClick={() => handleActiveMarker(null)}>
+                <h6>Sweet as!</h6>
+            </InfoWindow>) : null}
+
+          </Marker>
+          ))}
+        </Fragment>
+       
+      )
+    }
+
+    const updateView = () => {
+      return (
+        <Fragment>
+           {markers && markers.map((item,index) => (
             <Marker
                 key={item.lng()}
                 position={item}
@@ -28,12 +49,18 @@ const LocationMarker = ({markers}) => {
               > 
             {activeMarker === index ?  (<InfoWindow key={index} onCloseClick={() => handleActiveMarker(null)}>
                 <div className="flex-col justify-items-center">
-                   {/* <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-40 rounded mt-5" onClick={() => removeMarker(item)} name="remove marker"> Remove Location</button> <br /> */}
-                   <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-40 rounded" onClick={()=> addDetails(item)}  name="Add details"> Add Details </button>
+                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-40 rounded" onClick={()=> addDetails(item)}  name="Add details"> Add Details </button>
             </div>
             </InfoWindow>) : null}
             </Marker>
             ))}
+        </Fragment>
+      )
+    }
+
+    return (
+        <Fragment>
+          {editable ? updateView() : onlyView() }
         </Fragment>
     )
 }

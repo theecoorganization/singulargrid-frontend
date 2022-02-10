@@ -24,7 +24,7 @@ const AddProject: NextPage = (props) => {
     useEffect(() => {
         const { lat, lng } = router.query;
         if (!lat && !lng) {
-            router.push('/explore');
+            router.push('/admin/explore');
         }
         setPlace({ lat, lng })
     }, [])

@@ -22,15 +22,10 @@ withGoogleMap
         onClick={(e) => {
           props.addMarker(e.latLng);
         }}
-      >    
-       {props.markers &&  <LocationMarker markers={props.markers} />}
+      > 
+       {props.markers &&  <LocationMarker markers={props.markers} editable={props.editable}/>}
       </GoogleMap>);
 
-
-
-const mapStateToProps = (state) => ({
-  markers : state.marker,
-})
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -39,4 +34,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Map)
+export default connect(null, mapDispatchToProps)(Map)
