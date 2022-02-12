@@ -7,14 +7,14 @@ import instance from "../../api/request";
 import Modal from "@/components/Modal/Modal"
 
 const AddProject: NextPage = (props) => {
-    const [managers] = ['Atoll Council', 'Kudafari Council', 'Maafaru Council', 'Manadhoo Council'];
-    const [projectType] = ['Housing Development Project', 'Conservation Area', 'Tourism Development Project']
+    const [managers, setManagers] = useState([]);
+    const [projectTypes, setProjectTypes] = useState([]);
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [place, setPlace] = useState({});
     const [showModal, setShowModal] = React.useState(false);
 
     const onSubmit = async (data) => {
-        data.location = place
+        data.location = place;
         await instance.post('project/add', data);
         setShowModal(true);
     };
@@ -24,10 +24,23 @@ const AddProject: NextPage = (props) => {
     useEffect(() => {
         const { lat, lng } = router.query;
         if (!lat && !lng) {
-            router.push('/admin/explore');
+             router.push('/admin/explore');
+             return;
         }
-        setPlace({ lat, lng })
-    }, [])
+        setPlace({ lat, lng });
+        getProjectTypes();
+    }, []);
+
+    const getProjectTypes = async () => { 
+        const types =  await instance.get('/projectType/');
+        const managers = await instance.get('/projectManager/');
+        if(types.data) {
+            setProjectTypes(types.data);
+        }
+        if(managers.data) {
+            setManagers(managers.data);
+        }
+    };
 
     const onAddSuccess = () => {
         setShowModal(false);
@@ -67,10 +80,9 @@ const AddProject: NextPage = (props) => {
                             </label>
                             <div className="relative">
                                 <select {...register("projectManager", { required: true })} className="block appearance-none w-full  border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-                                    <option value="Atoll Council">Atoll Council</option>
-                                    <option value="Kudafari Council">Kudafari Council</option>
-                                    <option value="Maafaru Council">Maafaru Council</option>
-                                    <option value="Manadhoo Council">Manadhoo Council</option>
+                                {managers.map((item) => (
+                                        <option value={item.name}>{item.name}</option>
+                                    ))}
                                 </select>
                                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                                     <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
@@ -84,9 +96,9 @@ const AddProject: NextPage = (props) => {
                             </label>
                             <div className="relative">
                                 <select {...register("projectType",{ required: true })} className="block appearance-none w-full border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-                                    <option value="Housing Development Project">Housing Development Project</option>
-                                    <option value="Conservation Area">Conservation Area</option>
-                                    <option value="Tourism Development Project">Tourism Development Project</option>
+                                    {projectTypes.map((item) => (
+                                        <option value={item.name}>{item.name}</option>
+                                    ))}
                                 </select>
                                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                                     <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>

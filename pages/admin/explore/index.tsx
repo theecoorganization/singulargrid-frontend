@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 
 const ExploreMap = ({markers}) => {
-    console.log(markers);
     return (
         <Fragment>
             <MapView markers={markers} editable={true}></MapView>
