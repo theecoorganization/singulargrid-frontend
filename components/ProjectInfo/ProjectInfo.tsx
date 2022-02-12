@@ -30,7 +30,7 @@ const ProjectInfo:FunctionComponent<ProjectDetails> = ({name, type, manager, des
                 <Image className="m-5 rounded"src={Reef} width="128" height="128" />
                 <Image className="m-5 rounded" src={Palmtrees} width="128" height="128" />
                 </div>
-             </div>
+             </div> <br />
              </div>
         </Fragment>
     )
