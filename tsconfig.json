@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "baseUrl": ".",
+    "typeRoots" : ["node_modules/@types", "/types"],
     "paths": {
       "@/components/*": ["components/*"]
     },
@@ -26,8 +27,7 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "components/chart/LineChart.jsx"  ],
+    "**/*.tsx"],
   "exclude": [
     "node_modules"
   ]
