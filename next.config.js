@@ -1,7 +1,9 @@
 const withImages = require('next-images')
 
 module.exports = {
-    ...withImages(),
+    ...withImages({
+        inlineImageLimit: false
+      }),
     future: {
         webpack5: true,
     },

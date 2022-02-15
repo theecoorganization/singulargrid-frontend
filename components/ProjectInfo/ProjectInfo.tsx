@@ -2,7 +2,7 @@
 import { useRouter } from "next/dist/client/router";
 import { Fragment } from "react";
 import { FunctionComponent } from "react";
-import Image from "next/Image";
+import Image from "next/image";
 import Eco from "../../public/assets/eco.png";
 import Noonu from "../../public/assets/noonu.jpg";
 import Reef from "../../public/assets/reef.jpg";
