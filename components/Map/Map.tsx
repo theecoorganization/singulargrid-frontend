@@ -17,8 +17,8 @@ withScriptjs,
 withGoogleMap
 )((props) => 
       <GoogleMap
-        defaultZoom={17}
-        defaultCenter={{ lat: 4.1755, lng: 73.5093 }}
+        defaultZoom={13}
+        defaultCenter={{ lat: 5.758419, lng: 73.320568 }}
         mapTypeId={props.editable ? 'terrain' : 'hybrid'}
         onClick={(e) => {
           props.addMarker(e.latLng);
