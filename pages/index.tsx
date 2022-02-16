@@ -1,13 +1,14 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
-const Home: NextPage = () => {
-  return (
-    <h1 className="text-3xl font-bold underline">
-    Hello world!
-  </h1>
-  )
+const Home = () => {
+  const routes = useRouter();
+
+  useEffect(() => {
+    routes.push("/explore");
+  },[]); 
+
+  return null;
 }
 
-export default Home
+export default Home;
