@@ -6,7 +6,12 @@ import instance from "../../../api/request";
 import Modal from "@/components/Modal/Modal";
 import ListBar from '@/components/ListBar/ListBar';
 
-const AddProject: NextPage = (props) => {
+import { getProjectTypes } from 'store/Lov/ProjectType/action';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import CategoriesTable from '@/components/CategoriesTable/CategoriesTable';
+
+const ProjectTypes  = ({projectTypes, getProjectTypes}) => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [showModal, setShowModal] = useState(false);
 
@@ -22,6 +27,10 @@ const AddProject: NextPage = (props) => {
         setShowModal(false);
         router.push('/project/view');
     }
+
+    useEffect(()=> {
+        getProjectTypes();
+    },[])
 
 
     return (
@@ -59,8 +68,21 @@ const AddProject: NextPage = (props) => {
                 </div>
             </div>
 
+            <CategoriesTable categoryItem={projectTypes} />
+
         </div>
     )
 }
 
-export default AddProject;
+const mapStateToProps = (state) => ({
+    projectTypes : state.projectTypes,
+  })
+  
+  const mapDispatchToProps = (dispatch) => {
+    return {
+        getProjectTypes: bindActionCreators(getProjectTypes, dispatch),
+    }
+  }
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(ProjectTypes)
+

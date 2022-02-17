@@ -4,14 +4,18 @@ import React, { useEffect, useState } from "react";
 import { useForm } from 'react-hook-form';
 import instance from "../../../api/request";
 import Modal from "@/components/Modal/Modal";
-import ListBar from '@/components/ListBar/ListBar';
+import CategoriesTable from "@/components/CategoriesTable/CategoriesTable";
 
-const AddProject: NextPage = (props) => {
+import { getProjectManagers } from 'store/Lov/ProjectManager/action';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+
+const AddProjectManager = ({ projectManagers, getProjectManagers}) => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [showModal, setShowModal] = useState(false);
 
     const onSubmit = async (data) => {
-        console.log(data);
         await instance.post('projectManager/add', data);
         setShowModal(true);
     };
@@ -23,7 +27,11 @@ const AddProject: NextPage = (props) => {
         router.push('/project/view');
     }
 
+    useEffect(()=> {
+        getProjectManagers();
+    },[])
 
+  
     return (
         <div className="w-full">
             <div className='mt-12 flex justify-center'>
@@ -59,8 +67,20 @@ const AddProject: NextPage = (props) => {
                 </div>
             </div>
 
+           {projectManagers && <CategoriesTable categoryItem={projectManagers} /> }
         </div>
     )
 }
 
-export default AddProject;
+const mapStateToProps = (state) => ({
+    projectManagers : state.projectManagers,
+  })
+  
+  const mapDispatchToProps = (dispatch) => {
+    return {
+        getProjectManagers: bindActionCreators(getProjectManagers, dispatch),
+    }
+  }
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(AddProjectManager)
+

@@ -4,6 +4,8 @@ import thunkMiddleware from 'redux-thunk';
 import locationDetails from './Location/reducer'
 import marker from './Marker/reducer'
 import projectDetails from "./Project/reducer"
+import projectManagers from "./Lov/ProjectManager/reducer"
+import projectTypes from "./Lov/ProjectType/reducer"
 
 export interface State {
   app: string;
@@ -13,7 +15,9 @@ export interface State {
 const combinedReducer = combineReducers({
   locationDetails,
   marker,
-  projectDetails
+  projectManagers,
+  projectDetails,
+  projectTypes
 })
 
 const bindMiddleware = (middleware) => {
