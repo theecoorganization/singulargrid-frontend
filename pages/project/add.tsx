@@ -1,10 +1,10 @@
 import ListBar from "@/components/ListBar/ListBar";
+import Modal from "@/components/Modal/Modal";
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from "react";
 import { useForm } from 'react-hook-form';
 import instance from "../../api/request";
-import Modal from "@/components/Modal/Modal"
 
 const AddProject: NextPage = (props) => {
     const [managers, setManagers] = useState([]);

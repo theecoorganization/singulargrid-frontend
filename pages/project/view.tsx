@@ -1,12 +1,9 @@
-import type { NextPage } from 'next'
 import ListBar from "@/components/ListBar/ListBar";
-import { useForm } from 'react-hook-form';
-import React, { useEffect, useState } from "react";
 import ProjectInfo from '@/components/ProjectInfo/ProjectInfo';
-import instance from "api/request";
-import { getProjects } from 'store/Project/action';
+import React, { useEffect } from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { getProjects } from 'store/Project/action';
 
 
 const ViewProject = ({getProjects,projects}) => {

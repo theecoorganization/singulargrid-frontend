@@ -1,35 +1,31 @@
-import type { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from "react";
-import { useForm } from 'react-hook-form';
-import instance from "../../../api/request";
-import Modal from "@/components/Modal/Modal";
 import CategoriesTable from "@/components/CategoriesTable/CategoriesTable";
-
-import { getProjectManagers } from 'store/Lov/ProjectManager/action';
+import React, { useEffect } from "react";
+import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { getProjectManagers } from 'store/Lov/ProjectManager/action';
+import instance from "../../../api/request";
+
 
 
 const AddProjectManager = ({ projectManagers, getProjectManagers}) => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const [showModal, setShowModal] = useState(false);
-
-    const onSubmit = async (data) => {
-        await instance.post('projectManager/add', data);
-        setShowModal(true);
-    };
-
-    const router = useRouter();
-
-    const onAddSuccess = () => {
-        setShowModal(false);
-        router.push('/project/view');
-    }
 
     useEffect(()=> {
         getProjectManagers();
     },[])
+
+    const deleteItem = async (data) => {
+        await instance.delete(`projectManager/${data._id}`);
+        getProjectManagers();
+    }
+
+    const addItem = async (data) => {
+        await instance.post('projectManager/add', data);
+        getProjectManagers();
+    };
+
+
 
   
     return (
@@ -40,16 +36,7 @@ const AddProjectManager = ({ projectManagers, getProjectManagers}) => {
 
             <div className='flex justify-center'>
                 <div className="w-2/4 p-16 mt-12 border-2 border-grey-300 border-solid rounded">
-                    <div className="flex flex-col mt-20 ml-40  absolute z-50">
-                        {showModal ? <Modal>
-                            <div className="flex flex-col justify-between">
-                                <p> Successfully added Project Maanger. </p>
-                                <button className='mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-10 rounded mx-3' onClick={onAddSuccess} value="submit">Done </button>
-                            </div>
-                        </Modal> : ''}
-                    </div>
-
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form onSubmit={handleSubmit(addItem)}>
                         <div className="flex">
                             <div className="w-full">
                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" >
@@ -67,7 +54,7 @@ const AddProjectManager = ({ projectManagers, getProjectManagers}) => {
                 </div>
             </div>
 
-           {projectManagers && <CategoriesTable categoryItem={projectManagers} /> }
+           {projectManagers.length > 0 && <CategoriesTable categoryItem={projectManagers} deleteItem={deleteItem} />}
         </div>
     )
 }

@@ -1,36 +1,33 @@
-import type { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from "react";
+import CategoriesTable from '@/components/CategoriesTable/CategoriesTable';
+import React, { useEffect } from "react";
 import { useForm } from 'react-hook-form';
-import instance from "../../../api/request";
-import Modal from "@/components/Modal/Modal";
-import ListBar from '@/components/ListBar/ListBar';
-
-import { getProjectTypes } from 'store/Lov/ProjectType/action';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import CategoriesTable from '@/components/CategoriesTable/CategoriesTable';
+import { getProjectTypes } from 'store/Lov/ProjectType/action';
+import instance from "../../../api/request";
+
+
 
 const ProjectTypes  = ({projectTypes, getProjectTypes}) => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const [showModal, setShowModal] = useState(false);
-
-    const onSubmit = async (data) => {
-        console.log(data);
-        await instance.post('projectType/add', data);
-        setShowModal(true);
-    };
-
-    const router = useRouter();
-
-    const onAddSuccess = () => {
-        setShowModal(false);
-        router.push('/project/view');
-    }
 
     useEffect(()=> {
         getProjectTypes();
     },[])
+
+
+
+    const deleteItem = async (data) => {
+        await instance.delete(`projectType/${data._id}`);
+        getProjectTypes();
+    }
+
+    const addItem = async (data) => {
+        await instance.post('projectType/add', data);
+        getProjectTypes();
+    };
+
+   
 
 
     return (
@@ -41,16 +38,7 @@ const ProjectTypes  = ({projectTypes, getProjectTypes}) => {
 
             <div className='flex justify-center'>
                 <div className="w-2/4 p-16 mt-12 border-2 border-grey-300 border-solid rounded">
-                    <div className="flex flex-col mt-20 ml-40  absolute z-50">
-                        {showModal ? <Modal>
-                            <div className="flex flex-col justify-between">
-                                <p> Successfully added Project type. </p>
-                                <button className='mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-10 rounded mx-3' onClick={onAddSuccess} value="submit">Done </button>
-                            </div>
-                        </Modal> : ''}
-                    </div>
-
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form onSubmit={handleSubmit(addItem)}>
                         <div className="flex">
                             <div className="w-full">
                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" >
@@ -68,7 +56,7 @@ const ProjectTypes  = ({projectTypes, getProjectTypes}) => {
                 </div>
             </div>
 
-            <CategoriesTable categoryItem={projectTypes} />
+            {projectTypes.length > 0  && <CategoriesTable categoryItem={projectTypes} deleteItem={deleteItem} />}
 
         </div>
     )

@@ -13,3 +13,4 @@ export const projectManagerTypes = {
     const response = await instance.get('/projectManager/');
     return dispatch({ type: projectManagerTypes.GET, values: response.data })
   }
+
